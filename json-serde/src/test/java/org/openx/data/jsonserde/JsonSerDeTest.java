@@ -676,7 +676,22 @@ public class JsonSerDeTest {
         assertTrue(soi.getStructFieldData(res, soi.getStructFieldRef("stringCol")).equals("str"));
         assertNull(soi.getStructFieldData(res, soi.getStructFieldRef("nullCol")));
         assertNull(soi.getStructFieldData(res, soi.getStructFieldRef("missingCol")));
-        assertEquals(jsonStr,"{\"nullCol\":null,\"stringCol\":\"str\",\"missingCol\":null}");
+        
+        String expectedJsonStr1 = "{\"nullCol\":null,\"stringCol\":\"str\",\"missingCol\":null}";
+        String expectedJsonStr2 = "{\"stringCol\":\"str\",\"nullCol\":null,\"missingCol\":null}";
+        String expectedJsonStr3 = "{\"missingCol\":null,\"stringCol\":\"str\",\"nullCol\":null}";
+        String expectedJsonStr4 = "{\"nullCol\":null,\"missingCol\":null,\"stringCol\":\"str\"}";
+        String expectedJsonStr5 = "{\"stringCol\":\"str\",\"missingCol\":null,\"nullCol\":null}";
+        String expectedJsonStr6 = "{\"missingCol\":null,\"nullCol\":null,\"stringCol\":\"str\"}";
+
+        assertTrue(
+        jsonStr.equals(expectedJsonStr1) || 
+        jsonStr.equals(expectedJsonStr2) || 
+        jsonStr.equals(expectedJsonStr3) || 
+        jsonStr.equals(expectedJsonStr4) || 
+        jsonStr.equals(expectedJsonStr5) || 
+        jsonStr.equals(expectedJsonStr6)
+        );
     }
 
     @Test
@@ -708,6 +723,20 @@ public class JsonSerDeTest {
 
         assertNull(soi.getStructFieldData(res, soi.getStructFieldRef("missingStructCol")));
 
-        assertEquals(jsonStr,"{\"missingStructCol\":null,\"structCol\":{\"name\":\"myName\"},\"structNullCol\":{\"name\":null}}");
+        String expectedJsonStr1 = "{\"missingStructCol\":null,\"structCol\":{\"name\":\"myName\"},\"structNullCol\":{\"name\":null}}";
+        String expectedJsonStr2 = "{\"missingStructCol\":null,\"structNullCol\":{\"name\":null},\"structCol\":{\"name\":\"myName\"}}";
+        String expectedJsonStr3 = "{\"structCol\":{\"name\":\"myName\"},\"missingStructCol\":null,\"structNullCol\":{\"name\":null}}";
+        String expectedJsonStr4 = "{\"structCol\":{\"name\":\"myName\"},\"structNullCol\":{\"name\":null},\"missingStructCol\":null}";
+        String expectedJsonStr5 = "{\"structNullCol\":{\"name\":null},\"missingStructCol\":null,\"structCol\":{\"name\":\"myName\"}}";
+        String expectedJsonStr6 = "{\"structNullCol\":{\"name\":null},\"structCol\":{\"name\":\"myName\"},\"missingStructCol\":null}";
+
+        assertTrue(
+        jsonStr.equals(expectedJsonStr1) || 
+        jsonStr.equals(expectedJsonStr2) || 
+        jsonStr.equals(expectedJsonStr3) || 
+        jsonStr.equals(expectedJsonStr4) || 
+        jsonStr.equals(expectedJsonStr5) || 
+        jsonStr.equals(expectedJsonStr6)
+        );
     }
 }
